@@ -1,0 +1,135 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url(./images/bg.png), url('https://i.pinimg.com/736x/d2/38/6d/d2386d123002a0a85891f8c459829310.jpg') repeat-y center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Potta One", system-ui;
+}
+
+.container {
+    background-color: white;
+    width: 50%;
+    min-height: fit-content;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px;
+    margin: 30px auto;
+}
+
+#heading {
+    font-size: 1.5rem;
+    font-family: "Playpen Sans Hebrew", cursive;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    color: rgb(73, 32, 32);
+}
+
+.point-system {
+    margin-bottom: 30px;
+}
+
+.headings {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#addCourseBtn {
+    padding: 7px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 7px;
+    border: 2px solid rgb(73, 32, 32);
+    transition: .6s ease-in-out;
+    box-shadow: 1px 2px 4px grey;
+    cursor: pointer;
+}
+
+#addCourseBtn:hover {
+    background-color: rgb(73, 32, 32);
+    color: white;
+}
+
+#calculateBtn {
+    padding: 7px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 7px;
+    border: 2px solid rgb(73, 32, 32);
+    transition: .6s ease-in-out;
+    box-shadow: 1px 2px 4px grey;
+    cursor: pointer;
+}
+
+#calculateBtn:hover {
+    background-color: rgb(73, 32, 32);
+    color: white;
+}
+
+.course {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.serial-number {
+    font-size: 1.2rem;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.course input {
+    flex: 5;
+    width: 10px;
+    max-width: fit-content;
+    font-size: 1.2rem;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+    border: 2px solid rgb(73, 32, 32);
+}
+
+.delete {
+    flex: 1;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin: auto;
+    border: 2px solid red;
+    color: red;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s;
+    max-width: 40px;
+}
+
+.delete:hover {
+    background-color: red;
+    color: white;
+}
+
+.gpa {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin: 30px;
+}
+
+.copyrightText {
+    color: white;
+    font-style: ;
+    margin-bottom: 10px;
+    text-shadow: 0 0 4px black;
+    font-family: Arial, Helvetica, sans-serif;
+}

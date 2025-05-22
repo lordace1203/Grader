@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- PAGE TITLE -->
+    <title>Grader</title>
+    <!-- STYLE SHEET -->
+    <link rel="stylesheet" href="style.css">
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- GLOBAL FONT LINKS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Chango&family=Molle&family=Playpen+Sans+Hebrew:wght@100..800&family=Poetsen+One&family=Potta+One&display=swap" rel="stylesheet">
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    background: url(./images/bg.png), url('https://i.pinimg.com/736x/d2/38/6d/d2386d123002a0a85891f8c459829310.jpg') repeat-y center center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: "Potta One", system-ui;
+}
+
+.container {
+    background-color: white;
+    width: 50%;
+    min-height: fit-content;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 0 10px;
+    margin: 30px auto;
+}
+
+#heading {
+    font-size: 1.5rem;
+    font-family: "Playpen Sans Hebrew", cursive;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    color: rgb(73, 32, 32);
+}
+
+.point-system {
+    margin-bottom: 30px;
+}
+
+.headings {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+#addCourseBtn {
+    padding: 7px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 7px;
+    border: 2px solid rgb(73, 32, 32);
+    transition: .6s ease-in-out;
+    box-shadow: 1px 2px 4px grey;
+    cursor: pointer;
+}
+
+#addCourseBtn:hover {
+    background-color: rgb(73, 32, 32);
+    color: white;
+}
+
+#calculateBtn {
+    padding: 7px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 7px;
+    border: 2px solid rgb(73, 32, 32);
+    transition: .6s ease-in-out;
+    box-shadow: 1px 2px 4px grey;
+    cursor: pointer;
+}
+
+#calculateBtn:hover {
+    background-color: rgb(73, 32, 32);
+    color: white;
+}
+
+.course {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.serial-number {
+    font-size: 1.2rem;
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.course input {
+    flex: 5;
+    width: 10px;
+    max-width: fit-content;
+    font-size: 1.2rem;
+    padding: 5px;
+    border-radius: 10px;
+    margin-right: 10px;
+    border: 2px solid rgb(73, 32, 32);
+}
+
+.delete {
+    flex: 1;
+    font-size: 1.1rem;
+    padding: 5px;
+    margin: auto;
+    border: 2px solid red;
+    color: red;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: .5s;
+    max-width: 40px;
+}
+
+.delete:hover {
+    background-color: red;
+    color: white;
+}
+
+.gpa {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    margin: 30px;
+}
+
+.copyrightText {
+    color: white;
+    font-style: ;
+    margin-bottom: 10px;
+    text-shadow: 0 0 4px black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header id="heading">
+            <h1>Grader <i class="fa-solid fa-calculator"></i></h1>
+        </header>
+        <div class="point-system">
+            <input type="radio" name="grading" id="first-point-system" value="4" checked>
+            <label for="4-point">4 Point System</label>
+            <input type="radio" name="grading" value="5" id="second-point-system">
+            <label for="5-point">5 Point System</label>
+        </div>
+        <div class="course-container">
+            <div class="headings">
+                <p>TITLE</p>
+                <p>UNIT</p>
+                <p>GRADE</p>
+            </div>
+            <div class="course">
+                <p class="serial-number"></p>
+                <input type="text" placeholder="Title" class="course-title">
+                <input type="number" value="1" placeholder="Unit" class="course-unit">
+                <input type="text" placeholder="Grade" class="course-grade">
+                <i class="fa-solid fa-trash delete"></i>
+            </div>
+        </div>
+        <button id="addCourseBtn">Add Course</i></button>
+        <button id="calculateBtn">Calculate <i class="fa-solid fa-paper-plane"></i></button>
+        <div class="gpa">GPA: 0.00</div>
+    </div>
+
+    <footer>
+        <p class="copyrightText">&copy; 2025 Your Company Name. All rights reserved.
+</p>
+    </footer>
+    <!-- JAVASCRIPT TAG -->
+    <script>
+        // ELEMENT SELECTORS
+const container = document.querySelector('.container');
+const addCourseBtn = document.querySelector('#addCourseBtn');
+const calculateBtn = document.querySelector('#calculateBtn');
+const courseContainer = document.querySelector('.course-container');
+const deleteCourse = document.querySelector('.delete');
+
+
+// VARIABLES
+let number;
+let courseGrade = document.querySelector('.course-grade');
+document.querySelector('.serial-number').innerText = 1;
+
+// ADD COURSE EVENT HANDLER
+addCourseBtn.onclick = function () {
+
+    number = document.querySelectorAll('.course').length + 1;
+
+    // CREATE AND APPEND COURSE DETAILS
+    let course = document.createElement('div');
+    course.classList.add('course');
+
+    // ADD SERIAL NUMBER TO CURRENT COURSE
+    let numberParagraph = document.createElement('p');
+    numberParagraph.classList.add('serial-number');
+    numberParagraph.innerText = number;
+    course.append(numberParagraph);
+
+    // ADD COURSE TITLE TO CURRENT COURSE
+    let courseTitle = document.createElement('input');
+    courseTitle.setAttribute('type', 'text');
+    courseTitle.setAttribute('placeholder', 'Title');
+    courseTitle.classList.add('course-title');
+    course.append(courseTitle);
+
+    // ADD COURSE UNIT TO CURRENT COURSE
+    let courseUnit = document.createElement('input');
+    courseUnit.setAttribute('type', 'number');
+    courseUnit.setAttribute('value', '1');
+    courseUnit.setAttribute('placeholder', 'Unit');
+    courseUnit.classList.add('course-unit');
+    course.append(courseUnit);
+
+    // ADD COURSE GRADE TO CURRENT COURSE
+    let courseGrade = document.createElement('input');
+    courseGrade.setAttribute('type', 'text');
+    courseGrade.setAttribute('placeholder', 'Grade');
+    courseGrade.classList.add('course-grade');
+    course.append(courseGrade);
+
+    // TURN ENTERED GRADES TO UPPERCASE
+    courseGrade.oninput = function () {
+        this.value = this.value.toUpperCase();
+    }
+
+    // ADD DELETE BUTTON TO CURRENT COURSE
+    let courseDelete = document.createElement('i');
+    courseDelete.classList.add('delete', 'fa-solid', 'fa-trash');
+    course.append(courseDelete);
+
+    // APPEND A SINGLE COURSE PER CLICK
+    courseContainer.append(course);
+}
+
+// REMOVE COURSE HANDLER
+courseContainer.onclick = function (event) {
+    if (event.target.classList.contains('delete')) {
+        event.target.parentElement.remove();
+        updateSerialNumbers();
+    }
+}
+
+// TURN ENTERED GRADES TO UPPERCASE
+    courseGrade.oninput = function () {
+        this.value = this.value.toUpperCase();
+    }
+
+// UPDATE SERIAL NUMBER
+function updateSerialNumbers() {
+    const serialPararaphs = document.querySelectorAll('.serial-number');
+    serialPararaphs.forEach((serialParagraph, index) => {
+        serialParagraph.innerText = index + 1;
+    });
+}
+
+
+// SUBMIT/ CALCULATE BUTTON HANDLER
+calculateBtn.onclick = function () {
+    const gradingSystem = document.querySelector('input[name="grading"]:checked').value;
+
+    // OBJECTS STORING GRADEPOINTS AND THEIR VALUES
+    /*4 POINT SYSTEM*/
+    const gradePoints4 = {
+        "A": 4.0,
+        "AB": 3.5,
+        "B": 3.25,
+        "BC": 3.0,
+        "C": 2.75,
+        "CD": 2.5,
+        "D": 2.25,
+        "E": 2.0,
+        "EF": 1.75,
+        "F": 0
+    }
+
+    /*5 POINT SYSTEM*/
+    const gradePoints5 = {
+        "A": 5.0,
+        "B": 4.0,
+        "C": 3.0,
+        "D": 2.0,
+        "E": 2.0,
+        "F": 0.0
+    }
+
+
+    // GRADES AND UNITS ARRAYS
+    const unitArray = document.querySelectorAll('.course-unit');
+    const gradeArray = document.querySelectorAll('.course-grade');
+
+    // TOTAL UNITS AND TOTAL GRADES
+    let totalUnits = 0;
+    let totalGrades = 0;
+
+
+    // LOOP TO GO THROUGH EACH UNIT AND GRADE ENTERED
+
+    for (let i = 0; i < unitArray.length; i++) {
+
+        // INDIVIDUAL/ CURRENT GRADES AND UNITS
+        const currentUnit = parseFloat(document.querySelectorAll('.course-unit')[i].value);    //number
+        const currentGrade = document.querySelectorAll('.course-grade')[i].value.toUpperCase();  //alphabet string: a, ab ,b etc
+
+
+        let gradePoints = (gradingSystem === "4") ? gradePoints4 : gradePoints5;
+        // VALIDATING INPUTED DATA
+
+        if (!isNaN(currentUnit) && gradePoints.hasOwnProperty(currentGrade)) {
+            totalUnits += currentUnit;
+            totalGrades += gradePoints[currentGrade] * currentUnit;
+        }
+    }
+    const gpa = (totalUnits > 0) ? (totalGrades / totalUnits).toFixed(2) : "0.00";
+    document.querySelector('.gpa').innerText = "GPA: " + gpa;
+}
+
+
+// COPYRIGHT TEXT
+const year = new Date().getFullYear();
+const copyrightText = document.querySelector('.copyrightText');
+copyrightText.innerText =  'ⓒ ' +year+ ' Ace-WebDevs';
+
+
+    </script>
+</body>
+
+</html>
