@@ -136,6 +136,13 @@ calculateBtn.onclick = function () {
         if (!isNaN(currentUnit) && gradePoints.hasOwnProperty(currentGrade)) {
             totalUnits += currentUnit;
             totalGrades += gradePoints[currentGrade] * currentUnit;
+        } else {
+            // ERROR HANDLING
+            if (!gradePoints.hasOwnProperty(currentGrade)) {
+                alert(`Invalid Entry at course grade ${i + 1}. GPA has been set to '0.00'`);
+                document.querySelector('.gpa').innerText = "0.00";
+                return;
+            }
         }
     }
     const gpa = (totalUnits > 0) ? (totalGrades / totalUnits).toFixed(2) : "0.00";

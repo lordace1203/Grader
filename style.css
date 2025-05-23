@@ -133,3 +133,31 @@ body {
     text-shadow: 0 0 4px black;
     font-family: Arial, Helvetica, sans-serif;
 }
+
+@media screen and (max-width: 768px) {
+
+    body {
+        font-size:1rem;
+        font-family: "Potta One", system-ui;
+    }
+
+    .container {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 430px) {
+
+    body {
+        font-size: 1rem;
+          font-family: "Playpen Sans Hebrew", cursive;
+    }
+
+    #heading {
+        font-family: "Potta One", system-ui;
+    }
+
+    .container {
+        width: 90%;
+    }
+}
