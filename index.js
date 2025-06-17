@@ -8,15 +8,76 @@ const deleteCourse = document.querySelector('.delete');
 
 // VARIABLES
 let number;
-let courseGrade = document.querySelector('.course-grade');
-document.querySelector('.serial-number').innerText = 1;
+const gradeOptions1 = [{
+    label: 'Grade',
+    value: '0'
+}, {
+    label: 'A',
+    value: '4'
+}, {
+    label: 'AB',
+    value: '3.5'
+}, {
+    label: 'B',
+    value: '3.25'
+}, {
+    label: 'BC',
+    value: '3.00'
+}, {
+    label: 'C',
+    value: '2.75'
+}, {
+    label: 'CD',
+    value: '2.50'
+}, {
+    label: 'D',
+    value: '2.25'
+}, {
+    label: 'E',
+    value: '2.00'
+}, {
+    label: 'EF',
+    value: '1.75'
+}, {
+    label: 'F',
+    value: '0'
+}];
+
+const gradeOptions2 = [{
+    label: 'Grade',
+    value: '0'
+}, {
+    label: 'A',
+    value: '5'
+}, {
+    label: 'B',
+    value: '4'
+}, {
+    label: 'C',
+    value: '3'
+}, {
+    label: 'D',
+    value: '2'
+}, {
+    label: 'E',
+    value: '1'
+}, {
+    label: 'F',
+    value: '0'
+}];
+
+
+let courseGrade = document.querySelectorAll('.grade');
+
+
+
 
 // ADD COURSE EVENT HANDLER
 addCourseBtn.onclick = function () {
 
     number = document.querySelectorAll('.course').length + 1;
 
-    // CREATE AND APPEND COURSE DETAILS
+    // CREATE COURSE AND APPEND COURSE DETAILS
     let course = document.createElement('div');
     course.classList.add('course');
 
@@ -34,18 +95,24 @@ addCourseBtn.onclick = function () {
     course.append(courseTitle);
 
     // ADD COURSE UNIT TO CURRENT COURSE
-    let courseUnit = document.createElement('input');
-    courseUnit.setAttribute('type', 'number');
-    courseUnit.setAttribute('value', '1');
-    courseUnit.setAttribute('placeholder', 'Unit');
-    courseUnit.classList.add('course-unit');
+    let courseUnit = document.createElement('select');
+    let unitOptions = ['Unit', 1, 2, 3, 4, 5, 6];
+    unitOptions.forEach((option, index) => {
+        courseUnit.options[index] = new Option(option, index);
+    })
+    courseUnit.classList.add('select', 'unit');
+    courseUnit.setAttribute('id', 'unit-select');
     course.append(courseUnit);
 
+
     // ADD COURSE GRADE TO CURRENT COURSE
-    let courseGrade = document.createElement('input');
-    courseGrade.setAttribute('type', 'text');
-    courseGrade.setAttribute('placeholder', 'Grade');
-    courseGrade.classList.add('course-grade');
+    let gradingSystem = getGradingSystem();
+    let courseGrade = document.createElement('select');
+    gradingSystem.forEach((option, index) => {
+        courseGrade.options[index] = new Option(option.label, option.value);
+    })
+    courseGrade.classList.add('select', 'grade');
+    courseGrade.setAttribute('id', 'grade-select');
     course.append(courseGrade);
 
 
@@ -56,6 +123,7 @@ addCourseBtn.onclick = function () {
 
     // APPEND A SINGLE COURSE PER CLICK
     courseContainer.append(course);
+
 }
 
 // REMOVE COURSE HANDLER
@@ -66,12 +134,6 @@ courseContainer.onclick = function (event) {
     }
 }
 
-// TURN ENTERED GRADES TO UPPERCASE
-courseContainer.oninput = event => {
-    if (event.target.classList.contains('course-grade')) {
-        event.target.value = event.target.value.toUpperCase();
-    }
-}
 
 // UPDATE SERIAL NUMBER
 function updateSerialNumbers() {
@@ -84,69 +146,35 @@ function updateSerialNumbers() {
 
 // SUBMIT/ CALCULATE BUTTON HANDLER
 calculateBtn.onclick = function () {
-    const gradingSystem = document.querySelector('input[name="grading"]:checked').value;
-
-    // OBJECTS STORING GRADEPOINTS AND THEIR VALUES
-    /*4 POINT SYSTEM*/
-    const gradePoints4 = {
-        "A": 4.0,
-        "AB": 3.5,
-        "B": 3.25,
-        "BC": 3.0,
-        "C": 2.75,
-        "CD": 2.5,
-        "D": 2.25,
-        "E": 2.0,
-        "EF": 1.75,
-        "F": 0
-    }
-
-    /*5 POINT SYSTEM*/
-    const gradePoints5 = {
-        "A": 5.0,
-        "B": 4.0,
-        "C": 3.0,
-        "D": 2.0,
-        "E": 1.0,
-        "F": 0.0
-    }
+    const unitSelectArray = document.querySelectorAll('.unit');
+    const gradeSelectArray = document.querySelectorAll('.grade');
+    let totalGradePoints = 0;
+    let totalUnitPoints = 0;
 
 
-    // GRADES AND UNITS ARRAYS
-    const unitArray = document.querySelectorAll('.course-unit');
-    const gradeArray = document.querySelectorAll('.course-grade');
-
-    // TOTAL UNITS AND TOTAL GRADES
-    let totalUnits = 0;
-    let totalGrades = 0;
+    gradeSelectArray.forEach((gradeSelect, index) => {
 
 
-    // LOOP TO GO THROUGH EACH UNIT AND GRADE ENTERED
-
-    for (let i = 0; i < unitArray.length; i++) {
-
-        // INDIVIDUAL/ CURRENT GRADES AND UNITS
-        const currentUnit = parseFloat(document.querySelectorAll('.course-unit')[i].value);    //number
-        const currentGrade = document.querySelectorAll('.course-grade')[i].value.toUpperCase();  //alphabet string: a, ab ,b etc
-
-
-        let gradePoints = (gradingSystem === "4") ? gradePoints4 : gradePoints5;
-        // VALIDATING INPUTED DATA
-
-        if (!isNaN(currentUnit) && gradePoints.hasOwnProperty(currentGrade)) {
-            totalUnits += currentUnit;
-            totalGrades += gradePoints[currentGrade] * currentUnit;
+        if (unitSelectArray[index].value <= 0) {
+            alert(`Invalid Entry at Course Unit ${index + 1}`);
+            document.querySelector('.gpa').innerText = 'GPA: 0.00';
+            return;
         } else {
-            // ERROR HANDLING
-            if (!gradePoints.hasOwnProperty(currentGrade)) {
-                alert(`Invalid Entry at course grade ${i + 1}. GPA has been set to '0.00'`);
-                document.querySelector('.gpa').innerText = "0.00";
+            if (gradeSelect.value <= 0) {
+                alert(`Invalid Entry at Course Grade ${index + 1}`)
+                document.querySelector('.gpa').innerText = 'GPA: 0.00';
                 return;
+            } else {
+                totalGradePoints += Number((gradeSelect.value) * unitSelectArray[index].value);
+                totalUnitPoints += Number(unitSelectArray[index].value);
             }
         }
+    })
+
+    if (totalGradePoints > 0 && totalUnitPoints > 0) {
+        const gpa = totalGradePoints / totalUnitPoints;
+        document.querySelector('.gpa').innerText = `GPA: ${gpa.toFixed(2)}`;
     }
-    const gpa = (totalUnits > 0) ? (totalGrades / totalUnits).toFixed(2) : "0.00";
-    document.querySelector('.gpa').innerText = "GPA: " + gpa;
 }
 
 
@@ -155,3 +183,24 @@ const year = new Date().getFullYear();
 const copyrightText = document.querySelector('.copyrightText');
 copyrightText.innerText = 'ⓒ ' + year + ' Ace-WebDevs';
 
+
+
+// UPDATE GRADEPOINT SELECTION FROM THE UI
+function getGradingSystem() {
+    const selected = document.querySelector('input[name="grading"]:checked');
+    if (!selected) return gradeOptions1;
+    return selected.value == 4 ? gradeOptions1 : gradeOptions2;
+}
+
+// ATTACH LISTENER TO GRADE SYSTEM RADIOS AND UPDATE CURRENT SYSTEM
+document.querySelectorAll('input[name="grading"]').forEach((radio) => {
+    radio.addEventListener('click', () => {
+        let gradingSystem = getGradingSystem();
+        document.querySelectorAll('.grade').forEach((gradeSelect) => {
+            gradeSelect.innerHTML = '';
+            gradingSystem.forEach((option, index) => {
+                gradeSelect.options[index] = new Option(option.label, option.value);
+            })
+        })
+    })
+})

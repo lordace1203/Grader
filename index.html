@@ -8,18 +8,20 @@
     <title>Grader</title>
     <!-- STYLE SHEET -->
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- GLOBAL FONT LINKS -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Chango&family=Molle&family=Playpen+Sans+Hebrew:wght@100..800&family=Poetsen+One&family=Potta+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Chango&family=Molle&family=Playpen+Sans+Hebrew:wght@100..800&family=Poetsen+One&family=Potta+One&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-
     <div class="container">
         <header id="heading">
             <h1>Grader <i class="fa-solid fa-calculator"></i></h1>
@@ -31,16 +33,31 @@
             <label for="5-point">5 Point System</label>
         </div>
         <div class="course-container">
-            <div class="headings">
-                <p>TITLE</p>
-                <p>UNIT</p>
-                <p>GRADE</p>
-            </div>
+
             <div class="course">
-                <p class="serial-number"></p>
+                <p class="serial-number">1</p>
                 <input type="text" placeholder="Title" class="course-title">
-                <input type="number" value="1" placeholder="Unit" class="course-unit">
-                <input type="text" placeholder="Grade" class="course-grade">
+                <select class="select unit" name="unit-select" id="unit-select">
+                    <option value="0">Unit</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+                <select class="select grade" name="grade-select" id="grade-select">
+                    <option value="0">Grade</option>
+                    <option value="4.00">A</option>
+                    <option value="3.50">AB</option>
+                    <option value="3.25">B</option>
+                    <option value="3.00">BC</option>
+                    <option value="3.75">C</option>
+                    <option value="2.50">CD</option>
+                    <option value="2.25">D</option>
+                    <option value="2.00">E</option>
+                    <option value="1.75">EF</option>
+                    <option value="0">F</option>
+                </select>
                 <i class="fa-solid fa-trash delete"></i>
             </div>
         </div>
@@ -51,7 +68,7 @@
 
     <footer>
         <p class="copyrightText">&copy; 2025 Your Company Name. All rights reserved.
-</p>
+        </p>
     </footer>
     <!-- JAVASCRIPT TAG -->
     <script src="./index.js"></script>
