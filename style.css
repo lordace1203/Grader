@@ -28,7 +28,7 @@ body {
 .container {
     background-color: white;
     width: 85%;
-    max-width: 700px;
+    max-width: 600px;
     min-height: fit-content;
     border-radius: 8px;
     padding: 30px;
@@ -74,6 +74,7 @@ body {
 
 .course input {
     flex: 3;
+    min-width: 0;
     max-width: fit-content;
     font-size: 1.2rem;
     padding: 5px;

@@ -10,7 +10,7 @@ const deleteCourse = document.querySelector('.delete');
 let number;
 const gradeOptions1 = [{
     label: 'Grade',
-    value: '0'
+    value: 'Grade'
 }, {
     label: 'A',
     value: '4'
@@ -45,7 +45,7 @@ const gradeOptions1 = [{
 
 const gradeOptions2 = [{
     label: 'Grade',
-    value: '0'
+    value: 'Grade'
 }, {
     label: 'A',
     value: '5'
@@ -98,7 +98,7 @@ addCourseBtn.onclick = function () {
     let courseUnit = document.createElement('select');
     let unitOptions = ['Unit', 1, 2, 3, 4, 5, 6];
     unitOptions.forEach((option, index) => {
-        courseUnit.options[index] = new Option(option, index);
+        courseUnit.options[index] = new Option(option, option);
     })
     courseUnit.classList.add('select', 'unit');
     courseUnit.setAttribute('id', 'unit-select');
@@ -152,33 +152,40 @@ calculateBtn.onclick = function () {
     let totalUnitPoints = 0;
 
 
-    gradeSelectArray.forEach((gradeSelect, index) => {
 
+    for (let i = 0; i < gradeSelectArray.length; i++) {
 
-        if (unitSelectArray[index].value <= 0) {
-            alert(`Invalid Entry at Course Unit ${index + 1}`);
-            document.querySelector('.gpa').innerText = 'GPA: 0.00';
-            return;
+        if (unitSelectArray[i].value == 'Unit') {
+            alert(`Make a Selection at Course Unit ${i + 1}`);
+            totalGradePoints = 0;
+            totalUnitPoints = 0;
+            break;
         } else {
-            if (gradeSelect.value <= 0) {
-                alert(`Invalid Entry at Course Grade ${index + 1}`)
-                document.querySelector('.gpa').innerText = 'GPA: 0.00';
-                return;
+            if (gradeSelectArray[i].value == "Grade") {
+                alert(`Make a Selection at Course Grade ${i + 1}`)
+                totalGradePoints = 0;
+                totalUnitPoints = 0;
+                break;
             } else {
-                totalGradePoints += Number((gradeSelect.value) * unitSelectArray[index].value);
-                totalUnitPoints += Number(unitSelectArray[index].value);
+                totalGradePoints += Number((gradeSelectArray[i].value) * unitSelectArray[i].value);
+                totalUnitPoints += Number(unitSelectArray[i].value);
             }
         }
-    })
-
-    if (totalGradePoints > 0 && totalUnitPoints > 0) {
-        const gpa = totalGradePoints / totalUnitPoints;
-        document.querySelector('.gpa').innerText = `GPA: ${gpa.toFixed(2)}`;
     }
+
+    const gpa = totalGradePoints / totalUnitPoints;
+    if (!isNaN(gpa)) {
+        document.querySelector('.gpa').style.color = 'green';
+        document.querySelector('.gpa').innerText = `GPA: ${gpa.toFixed(2)}`;
+    } else {
+        document.querySelector('.gpa').style.color = 'red';
+        document.querySelector('.gpa').innerText = `GPA: 0.00`;
+    }
+
 }
 
 
-// COPYRIGHT TEXT
+// COPYRIGHT TEXT WITH DYNAMIC YEAR
 const year = new Date().getFullYear();
 const copyrightText = document.querySelector('.copyrightText');
 copyrightText.innerText = 'ⓒ ' + year + ' Ace-WebDevs';
@@ -188,7 +195,6 @@ copyrightText.innerText = 'ⓒ ' + year + ' Ace-WebDevs';
 // UPDATE GRADEPOINT SELECTION FROM THE UI
 function getGradingSystem() {
     const selected = document.querySelector('input[name="grading"]:checked');
-    if (!selected) return gradeOptions1;
     return selected.value == 4 ? gradeOptions1 : gradeOptions2;
 }
 
